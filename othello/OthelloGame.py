@@ -30,7 +30,9 @@ class OthelloGame(Game):
         Returns:
             actionSize: number of all possible actions
         """
-        pass
+        height = 8
+        width = 8
+        return height*width
 
     def getNextState(self, board, player, action):
         """
@@ -43,7 +45,10 @@ class OthelloGame(Game):
             nextBoard: board after applying action
             nextPlayer: player who plays in the next turn (should be -player)
         """
-        pass
+        assert(player==board.turn, "Attempted turn by wrong player")
+        x, y = action[0], action[1]
+        return board.move(x, y)
+
 
     def getValidMoves(self, board, player):
         """
@@ -69,7 +74,11 @@ class OthelloGame(Game):
                small non-zero value for draw.
 
         """
-        pass
+        has_won, player = board.get_win_state()
+        if not has_won:
+            return 0
+        return player #this will cause a bug if player isn't 1
+
 
     def getCanonicalForm(self, board, player):
         """
@@ -110,4 +119,4 @@ class OthelloGame(Game):
             boardString: a quick conversion of board to a string format.
                          Required by MCTS for hashing.
         """
-        pass
+        return board.__str__()

@@ -20,17 +20,26 @@ class Board:
             self.pieces=pieces
         self.turn=turn
 
+    #returns a board
     def move(self,x,y):
         #maybe dont check valid cause its expensive
+        new_board = self.__deepcopy__()
         moves = self.get_valid_moves()
         if not (x,y) in moves:
             raise ValueError("Not a legal move")
-        self.pieces[x][y]=self.turn
+        new_board.pieces[x][y]=new_board.turn
         for direc in Board.dirs:
-            piece, move = self.search((x,y),direc)
-            if piece==self.turn:
-                self.change((x,y),move,direc,self.turn)    
-        self.turn*=-1
+            piece, move = new_board.search((x,y),direc)
+            if piece==new_board.turn:
+                new_board.change((x,y),move,direc,new_board.turn)
+        new_board.turn*=-1
+        return new_board
+
+    def __deepcopy__(self, memodict={}):
+        pieces = np.copy(self.pieces)
+        turn = self.turn
+        return Board(pieces, turn)
+
 
     def get_valid_moves(self,player=None):
         if player==None:
@@ -93,7 +102,8 @@ class Board:
                 ret+=f"{int(self.pieces[i][j])} "
             ret+="\n"
         return ret
-        
+
+
 if __name__=="__main__":
     b = Board()
     player=1
@@ -101,7 +111,7 @@ if __name__=="__main__":
         print(b)
         moves = b.get_valid_moves()
         print(moves)
-        b.move(moves[0][0],moves[0][1])
+        b = b.move(moves[0][0],moves[0][1])
         print(moves[0])
         win,winner = b.get_win_state()
         if win:
