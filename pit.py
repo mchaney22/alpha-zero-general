@@ -16,7 +16,7 @@ g = OthelloGame(6)
 
 # all players
 rp = RandomPlayer(g).play
-gp = GreedyOthelloPlayer(g).play
+#gp = GreedyOthelloPlayer(g).play
 hp = HumanOthelloPlayer(g).play
 
 # nnet players
