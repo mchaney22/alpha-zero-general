@@ -46,7 +46,7 @@ class OthelloGame(Game):
             nextPlayer: player who plays in the next turn (should be -player)
         """
         assert(player==board.turn, "Attempted turn by wrong player")
-        x, y = action[0], action[1]
+        
         return board.move(x, y)
 
 

@@ -6,9 +6,10 @@ class HumanPlayer():
 
 	def play(self, board):
 		valid_moves = game.getValidMoves(board, 1) #bug if play doesn't get passed cannonical form
-		print(f"valid moves: {valid_moves}")
-		i = input("Enter indicie of move. I'm not verifying input right now so don't screw me on this")
-		move = valid_moves[int(i)]
+		print(f"board: {board}")
+		i = input("Enter indicie of move. 'x,y'")
+        coords = i.split(',')
+        x, y = coords[0],coords[1]
 		return move
     
 
