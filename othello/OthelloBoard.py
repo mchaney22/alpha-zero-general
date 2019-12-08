@@ -25,6 +25,7 @@ class Board:
         #maybe dont check valid cause its expensive
         x=action//self.length
         y=action%self.length
+        print(x,y)
         new_board = self.__deepcopy__()
         moves = self.get_valid_moves()
         if not moves[action]:
@@ -50,9 +51,9 @@ class Board:
         moves=[]
         for i in range(len(mine_x)):
             for direc in Board.dirs:
-                piece, move = self.search((mine_x[i],mine_y[i]),direc)
-                if move!=(-1,-1) and piece==0 and not move in moves:
-                    moves.append(move)
+                piece, m = self.search((mine_x[i],mine_y[i]),direc)
+                if m!=(-1,-1) and piece==0 and not m in moves:
+                    moves.append(m)
         vec = np.full(self.height*self.length,False)
         for m in moves:
             vec[m[0]*self.length+m[1]]=True

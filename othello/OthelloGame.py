@@ -30,10 +30,10 @@ class OthelloGame(Game):
         Returns:
             actionSize: number of all possible actions
         """
-        return len(self.base_board.get_valid_moves())
-        #height = 8
-        #width = 8
-        #return height*width
+        #return len(self.base_board.get_valid_moves())
+        height = 8
+        width = 8
+        return height*width
 
     def getNextState(self, board, player, action):
         """
@@ -140,4 +140,5 @@ class OthelloGame(Game):
             boardString: a quick conversion of board to a string format.
                          Required by MCTS for hashing.
         """
-        return board.__str__()
+        b = Board(board)
+        return b.__str__()
