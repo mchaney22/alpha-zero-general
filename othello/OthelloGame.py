@@ -64,8 +64,8 @@ class OthelloGame(Game):
                         moves that are valid from the current board and player,
                         0 for invalid moves
         """
-
-        return board.get_valid_moves(player)
+        b = Board(board,player)
+        return b.get_valid_moves()
 
     def getGameEnded(self, board, player):
         """
