@@ -27,7 +27,7 @@ class Board:
         y=action%self.length
         new_board = self.__deepcopy__()
         moves = self.get_valid_moves()
-        if not (x,y) in moves:
+        if not moves[action]:
             raise ValueError("Not a legal move")
         new_board.pieces[x][y]=new_board.turn
         for direc in Board.dirs:
