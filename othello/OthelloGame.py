@@ -49,8 +49,8 @@ class OthelloGame(Game):
         #assert(player==board.turn, "Attempted turn by wrong player")
         assert(action<self.getActionSize(), "Attempted actions not in action vector")
         b = Board(board,player)
-        b.move(action)
-        return b.pieces, -player
+        new_b = b.move(action)
+        return new_b.pieces, -player
 
 
     def getValidMoves(self, board, player):
@@ -119,7 +119,7 @@ class OthelloGame(Game):
                        form of the board and the corresponding pi vector. This
                        is used when training the neural network from examples.
         """
-        _board = np.reshape(pi[:-1], (self.n, self.n))
+        pi_board = np.reshape(pi, (8, 8))
         l = []
 
         for i in range(1, 5): 
@@ -129,7 +129,7 @@ class OthelloGame(Game):
                 if j:
                     newB = np.fliplr(newB)
                     newPi = np.fliplr(newPi)
-                l += [(newB, list(newPi.ravel()) + [pi[-1]])]
+                l += [(newB, list(newPi.ravel()))]
         return l
     def stringRepresentation(self, board):
         """
