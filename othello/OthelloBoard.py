@@ -29,11 +29,11 @@ class Board:
         #moves = self.get_valid_moves()
         #if not moves[action]:
         #    raise ValueError("Not a legal move")
-        new_board.pieces[x][y]=new_board.turn
+        new_board.pieces[y][x]=new_board.turn
         for direc in Board.dirs:
-            piece, move = new_board.search((x,y),direc)
+            piece, move = new_board.search((y,x),direc)
             if piece==new_board.turn:
-                new_board.change((x,y),move,direc,new_board.turn)
+                new_board.change((y,x),move,direc,new_board.turn)
         new_board.turn*=-1
         return new_board
 
@@ -63,7 +63,7 @@ class Board:
             self.pieces[start[0],start[1]]=player
             start=(start[0]+direc[0],start[1]+direc[1])
 
-    def search(self,start,direc):
+    def search(self,start,direc): #start is (y,x)
         player=self.pieces[start[0],start[1]]
         cur = (start[0]+direc[0],start[1]+direc[1])
         #doesnt straddle opponnents pieces
