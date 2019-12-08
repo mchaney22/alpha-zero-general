@@ -20,5 +20,6 @@ class RandomPlayer():
         
     def play(self, board):
         valid_moves = game.getValidMoves(board, 1)
-        i = np.random.randint(len(valid_moves))
-        return valid_moves(i)
+        move_indicies = [i for i in range(len(valid_moves)) if valid_moves[i]]
+        r = np.random.randint(len(move_indicies))
+        return move_indicies(r)
