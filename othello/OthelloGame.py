@@ -16,7 +16,7 @@ class OthelloGame(Game):
             startBoard: a representation of the board (ideally this is the form
                         that will be the input to your neural network)
         """
-        return self.base_board
+        return self.base_board.pieces
 
     def getBoardSize(self):
         """
@@ -30,9 +30,10 @@ class OthelloGame(Game):
         Returns:
             actionSize: number of all possible actions
         """
-        height = 8
-        width = 8
-        return height*width
+        return len(self.base_board.get_valid_moves())
+        #height = 8
+        #width = 8
+        #return height*width
 
     def getNextState(self, board, player, action):
         """
