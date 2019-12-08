@@ -74,10 +74,17 @@ class OthelloGame(Game):
                small non-zero value for draw.
 
         """
-        has_won, player = board.get_win_state()
+        has_won, winner = board.get_win_state()
         if not has_won:
             return 0
-        return player #this will cause a bug if player isn't 1
+        if winner is None:
+            return 1e-4
+        elif winner==player:
+            return +1
+        elif winner==-player:
+            return -1
+        raise ValueError("Invalid Win Sate",winner)
+
 
 
     def getCanonicalForm(self, board, player):
@@ -107,9 +114,18 @@ class OthelloGame(Game):
                        form of the board and the corresponding pi vector. This
                        is used when training the neural network from examples.
         """
-        # left/right symmetry. TODO implement the other symetries
-        return [(board, pi), (board[:, ::-1], pi[::-1])]
+        _board = np.reshape(pi[:-1], (self.n, self.n))
+        l = []
 
+        for i in range(1, 5): 
+            for j in [True, False]:
+                newB = np.rot90(board, i)
+                newPi = np.rot90(pi_board, i)
+                if j:
+                    newB = np.fliplr(newB)
+                    newPi = np.fliplr(newPi)
+                l += [(newB, list(newPi.ravel()) + [pi[-1]])]
+        return l
     def stringRepresentation(self, board):
         """
         Input:
