@@ -21,8 +21,10 @@ class Board:
         self.turn=turn
 
     #returns a board
-    def move(self,x,y):
+    def move(self,action):
         #maybe dont check valid cause its expensive
+        x=action//self.length
+        y=action%self.length
         new_board = self.__deepcopy__()
         moves = self.get_valid_moves()
         if not (x,y) in moves:
@@ -51,7 +53,10 @@ class Board:
                 piece, move = self.search((mine_x[i],mine_y[i]),direc)
                 if move!=(-1,-1) and piece==0 and not move in moves:
                     moves.append(move)
-        return moves
+        vec = np.full(self.height*self.length,False)
+        for m in moves:
+            vec[m[0]*self.length+m[1]]=True
+        return vec
 
     def change(self,start,end,direc,player):
         while start!=end:
