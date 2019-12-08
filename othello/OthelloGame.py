@@ -75,7 +75,8 @@ class OthelloGame(Game):
                small non-zero value for draw.
 
         """
-        has_won, winner = board.get_win_state()
+        b = Board(board,player)
+        has_won, winner = b.get_win_state()
         if not has_won:
             return 0
         if winner is None:
