@@ -47,7 +47,10 @@ class OthelloGame(Game):
             nextPlayer: player who plays in the next turn (should be -player)
         """
         assert(player==board.turn, "Attempted turn by wrong player")
-        x, y = action[0], action[1]
+        assert(action<=self.getActionSize(), "Attempted actions not in action vector")
+        x = action % self.length
+        y = action // self.length
+        
         return board.move(x, y)
 
 
@@ -62,6 +65,7 @@ class OthelloGame(Game):
                         moves that are valid from the current board and player,
                         0 for invalid moves
         """
+
         return board.get_valid_moves(player)
 
     def getGameEnded(self, board, player):
