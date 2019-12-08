@@ -46,6 +46,9 @@ class OthelloGame(Game):
             nextPlayer: player who plays in the next turn (should be -player)
         """
         assert(player==board.turn, "Attempted turn by wrong player")
+        assert(action<=self.getActionSize(), "Attempted actions not in action vector")
+        x = action % self.length
+        y = action // self.length
         
         return board.move(x, y)
 
