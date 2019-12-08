@@ -3,15 +3,15 @@ from collections import namedtuple
 
 WinState = namedtuple('WinState','is_ended winner')
 
-height=9
-width=9
+height=8
+length=8
 class Board:
     dirs = [(1,1),(1,0),(1,-1),(0,1),(0,-1),(-1,1),(-1,0),(-1,-1)]
     def __init__(self,pieces=None,turn=1):
         self.height=height
-        self.width=width
+        self.length=length
         if pieces is None:
-            self.pieces=np.zeros([self.height,self.width])
+            self.pieces=np.zeros([self.height,self.length])
             self.pieces[3,3]=-1
             self.pieces[3,4]=1
             self.pieces[4,3]=1
@@ -93,12 +93,12 @@ class Board:
         
         
     def on_board(self,pos):
-        return pos[0]<self.height and pos[0]>=0 and pos[1]<width and pos[1]>=0
+        return pos[0]<self.height and pos[0]>=0 and pos[1]<self.length and pos[1]>=0
 
     def __str__(self):
         ret = ""
         for i in range(self.height):
-            for j in range(self.width):
+            for j in range(self.length):
                 ret+=f"{int(self.pieces[i][j])} "
             ret+="\n"
         return ret
