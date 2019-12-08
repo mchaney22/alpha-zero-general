@@ -117,3 +117,4 @@ if __name__=="__main__":
         if win:
             print(f"winner is {winner}")
             break
+width
