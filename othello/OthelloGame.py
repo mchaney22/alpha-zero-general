@@ -142,3 +142,9 @@ class OthelloGame(Game):
         """
         b = Board(board)
         return b.__str__()
+
+def display(board):
+    print(" -----------------------")
+    print(' '.join(map(str, range(len(board[0])))))
+    print(board)
+    print(" -----------------------")

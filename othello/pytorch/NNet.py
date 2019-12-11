@@ -118,9 +118,10 @@ class NNetWrapper(NeuralNet):
             self.saver.save(self.sess, filepath)
 
     def load_checkpoint(self, folder='checkpoint', filename='checkpoint.pth.tar'):
+        
         filepath = os.path.join(folder, filename)
         if not os.path.exists(filepath + '.meta'):
-            raise("No model in path {}".format(filepath))
+            raise ValueError("No model in path {}".format(filepath))
         with self.nnet.graph.as_default():
             self.saver = tf.train.Saver()
             self.saver.restore(self.sess, filepath)
